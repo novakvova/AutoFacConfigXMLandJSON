@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using SimpleDI.Entities;
 using SimpleDI.Interfaces;
 using SimpleDI.Services;
 using System;
@@ -20,7 +21,10 @@ namespace SimpleDI
 
         protected override void Load(ContainerBuilder builder)
         {
-
+            builder.Register(ctx =>
+            {
+                return new EFContext(_connStr);
+            });
             builder.RegisterType<EmailServiceGoogle>()
                 .As<IEmailService>();
             builder.RegisterType<UserService>()

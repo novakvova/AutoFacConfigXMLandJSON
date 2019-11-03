@@ -57,7 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModule.cs" />
+    <Compile Include="Entities\DbUser.cs" />
+    <Compile Include="Entities\EFContext.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Migrations\201911030953142_Add tblUsers.cs" />
+    <Compile Include="Migrations\201911030953142_Add tblUsers.designer.cs">
+      <DependentUpon>201911030953142_Add tblUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\EmailServiceGoogle.cs" />
     <Compile Include="Interfaces\IEmailService.cs" />
     <Compile Include="Program.cs" />
@@ -69,7 +76,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911030953142_Add tblUsers.resx">
+      <DependentUpon>201911030953142_Add tblUsers.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
