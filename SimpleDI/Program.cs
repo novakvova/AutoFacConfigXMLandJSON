@@ -1,4 +1,5 @@
-﻿using SimpleDI.Interfaces;
+﻿using Autofac;
+using SimpleDI.Interfaces;
 using SimpleDI.Services;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,22 @@ namespace SimpleDI
     {
         static void Main(string[] args)
         {
-            //TestEmailService();
-            IEmailService es = /*new EmailServiceSendGrid();*/ new EmailServiceGoogle();
-            IUserService us = new UserService(es);
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule(new DataModule("DefaultConnection"));
+
+            var container = builder.Build();
+
+            //var es = container.Resolve<IEmailService>();
+
+            //IUserService us = new UserService(es);
+            var us = container.Resolve<IUserService>();
             var res = us.Register("gordon@gmail.com", "123456");
+
+            //TestEmailService();
+            //IEmailService es = /*new EmailServiceSendGrid();*/ new EmailServiceGoogle();
+            //IUserService us = new UserService(es);
+            //var res = us.Register("gordon@gmail.com", "123456");
         }
 
         private static void TestEmailService()
